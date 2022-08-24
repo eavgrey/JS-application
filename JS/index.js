@@ -32,7 +32,7 @@ input.style.backgroundColor = "#d3d3d342"
 input.style.borderRadius = "10px"
 input.style.borderColor = 'lightgrey'
 input.style.color = 'black'
-input.placeholder ='Type Your Task'
+input.placeholder = 'Type Your Task'
 ///
 
 const add = document.createElement('button')
@@ -41,8 +41,8 @@ inputToDo.appendChild(add)
 add.style.textAlign = 'center'
 add.style.width = '120px'
 add.style.padding = "4px"
-add.style.backgroundColor ="red"
-add.style.borderRadius ="10px"
+add.style.backgroundColor = "red"
+add.style.borderRadius = "10px"
 add.style.borderColor = 'lightgrey'
 add.style.color = 'white'
 add.innerHTML = "Add Task"
@@ -54,27 +54,32 @@ const toDoList = document.createElement('ul')
 toDo.appendChild(toDoList)
 
 
-const addTask = ()=>{
-  let inputTextValue = []
-  inputTextValue.push(input.value)
-  inputTextValue.forEach((inpt) => {
-    toDoListItem = document.createElement('li')
-    toDoList.appendChild(toDoListItem)
-    toDoListItem.innerHTML = input.value})
-  }
+const addTask = (event) => {
+  const toDoListItem = document.createElement('li')
+  toDoList.appendChild(toDoListItem)
+
+  toDoListItem.innerText = input.value
+  toDoListItem.onclick = markAsDone
+  event.preventDefault()
+}
 
 const clearInput = () => {
   input.value = ' '
- 
+
 }
-add.onclick = addTask
+let form = document.getElementById('form')
+form.onsubmit = addTask
 input.onfocus = clearInput
 
 const doneList = document.createElement('ul')
 done.appendChild(doneList)
 
-const markAsDone = ()=>{
- 
+const markAsDone = (event) => {
+  const toDoListItem = document.createElement('li')
+  doneList.appendChild(toDoListItem)
+  toDoListItem.innerText = event.target.innerHTML
+  event.target.remove()
+
 }
 
-toDoList.onclick = markAsDone
+
